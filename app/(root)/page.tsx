@@ -26,7 +26,7 @@ export default function Home() {
         </header>
         <RecentTransactionsWithShowMore/>
       </div>
-      <RightSidebar user={loggedIn} transactions={[]} banks={[{currentBalance: 1320}, {currentBalance: 400}]}/>
+      <RightSidebar user={loggedIn} transactions={[]} banks={[]}/>
     </section>
   );
 }
