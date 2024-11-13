@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+import Image from "next/image";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ const SignIn = () => {
       <div className="w-full md:max-w-xl lg:max-w-md p-8 bg-gray-800 rounded-lg">
         <div className="flex justify-center flex-col items-center mb-6">
           <h2 className="text-white text-2xl font-medium">Afribank Inc</h2>
-          <img
+          <Image
             src="/icons/logo.svg" // Replace with your logo's URL
             alt="Logo"
             className="w-16 h- mt-10"

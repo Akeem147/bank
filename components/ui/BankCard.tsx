@@ -1,13 +1,9 @@
-import { formatAmount } from "@/lib/utils";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function BankCard({
-  account,
-  userName,
-  showBalance = true,
-}: CreditCardProps) {
+export default function BankCard() {
   return (
     <div className="flex flex-col">
       <Link className="bank-card" href="/">

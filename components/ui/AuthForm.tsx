@@ -7,19 +7,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
+
 import {
   Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+
 import CustomInput from "./CustomInput";
-import { signIn, signUp } from "@/lib/actions/user.action";
+import { signUp } from "@/lib/actions/user.action";
 
 
 const formSchema = z.object({
@@ -30,7 +25,7 @@ const formSchema = z.object({
 });
 
 export default function AuthForm({ type }: { type: string }) {
-  const router = useRouter();
+
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
