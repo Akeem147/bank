@@ -41,7 +41,7 @@ export default function MobileNav() {
           onClick={handleMenu}
           className="text-black-1 rounded font-medium"
         >
-          <Menu />
+          <Menu width={24} height={24} />
         </button>
       </div>
 
@@ -68,7 +68,7 @@ export default function MobileNav() {
                   className="w-full flex items-center space-x-4 text-lg p-2 rounded my-1 hover:bg-blue-500 hover:text-white"
                 >
                      {Icon ? (
-               <span> <Icon  size={24} /></span> // Render React Icon if not null
+               <span> <Icon  width={24} height={24} /></span> // Render React Icon if not null
               ) : (
                 <span className="text-gray">Default Icon</span> // Fallback in case Icon is null
               )}

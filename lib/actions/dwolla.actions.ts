@@ -24,7 +24,7 @@ const dwollaClient = new Client({
 });
 
 interface DwollaErrorResponse extends Error {
-  response?: { data?: any };
+  response?: { data?: unknown };
 }
 
 // Create a Dwolla Funding Source using a Plaid Processor Token

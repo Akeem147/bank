@@ -5,14 +5,18 @@ import { BiBuildingHouse } from "react-icons/bi"; // Example for My Bank icon (u
 import { IoIosPaper } from "react-icons/io"; // Example for Pay Bills icon (use an appropriate one)
 
 // Type for the sidebar link object
-interface SidebarLink {
-  imgURL: React.ComponentType<any> | null;
+
+interface SidebarLink1 {
+  imgURL: React.ComponentType<React.SVGProps<SVGSVGElement>> | null;
   route: string;
   label: string;
 }
 
+
+
+
 // Define the sidebar links
-export const sidebarLinks1: SidebarLink[] = [
+export const sidebarLinks1: SidebarLink1[] = [
   {
     imgURL: RiHome6Line, // Home Icon from React Icons
     route: "/",

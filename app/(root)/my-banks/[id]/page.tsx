@@ -51,7 +51,7 @@ const bankDetailsData = [
 const BankDetailsPage = () => {
   const router = useRouter();
   const params = useParams(); // Access dynamic route parameters
-  const id = parseInt(params.id, 10);  
+  const id = parseInt(Array.isArray(params.id) ? params.id[0] : params.id || '', 10);
   
 
   // Find the bank account details based on the id
