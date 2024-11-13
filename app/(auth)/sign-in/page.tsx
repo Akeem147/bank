@@ -23,7 +23,7 @@ const SignIn = () => {
           icon: "🚫",
         });
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong, please try again.", {
         icon: "🚫",
       });
@@ -38,7 +38,8 @@ const SignIn = () => {
           <Image
             src="/icons/logo.svg" // Replace with your logo's URL
             alt="Logo"
-            className="w-16 h- mt-10"
+            className="mt-10"
+            width={40} height={40}
           />
         </div>
         <h2 className="text-xl font-semibold text-center text-gray-200 mb-6">

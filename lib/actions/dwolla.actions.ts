@@ -58,15 +58,19 @@ export const createDwollaCustomer = async (
   try {
     const res = await dwollaClient.post("customers", newCustomer);
     return res.headers.get("location");
-  } catch (err: any) {
-    // Log more detailed error information
-    if (err.response) {
-      console.error("Error creating Dwolla Customer:", err.response.data);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      // Check if err has a response property (optional chaining)
+      if ((err as any).response) {
+        console.error("Error creating Dwolla Customer:", (err as any).response.data);
+      } else {
+        console.error("Error creating Dwolla Customer:", err.message);
+      }
     } else {
-      console.error("Error creating Dwolla Customer:", err);
+      console.error("Unexpected error:", err);
     }
     throw new Error("It is failing to create a Dwolla customer");
-  }
+}
 };
 
 export const createTransfer = async ({
