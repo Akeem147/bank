@@ -7,7 +7,6 @@ import Image from "next/image";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -20,15 +19,14 @@ const SignIn = () => {
         });
         router.push("/");
       } else {
-        toast.error(
-          "Incorrect login details",
-          {
-            icon: "🚫",
-          }
-        );
+        toast.error("Incorrect login details", {
+          icon: "🚫",
+        });
       }
     } catch (error) {
-      setError("Something went wrong, please try again.");
+      toast.error("Something went wrong, please try again.", {
+        icon: "🚫",
+      });
     }
   };
 
@@ -83,8 +81,6 @@ const SignIn = () => {
               required
             />
           </div>
-
-          {error && <div className="text-sm text-red-500">{error}</div>}
 
           <button
             type="submit"
