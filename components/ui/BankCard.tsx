@@ -10,10 +10,10 @@ export default function BankCard() {
         <div className="bank-card_content">
           <div className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
-          <img
+          <Image
             src="/icons/logo.svg" // Replace with your logo's URL
             alt="Logo"
-            className="w-6 h-6"
+            width={30} height={30} 
           />
             <h2 className="text-white font-medium">Afribank</h2>
           </div>
