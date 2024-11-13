@@ -12,7 +12,7 @@ const getEnvironment = (): "production" | "sandbox" => {
       return "production";
     default:
       throw new Error(
-        "Dwolla environment should either be set to `sandbox` or `production`"
+        "Dwolla environment should either be set to sandbox or production"
       );
   }
 };
@@ -22,6 +22,10 @@ const dwollaClient = new Client({
   key: process.env.DWOLLA_KEY as string,
   secret: process.env.DWOLLA_SECRET as string,
 });
+
+interface DwollaErrorResponse extends Error {
+  response?: { data?: any };
+}
 
 // Create a Dwolla Funding Source using a Plaid Processor Token
 export const createFundingSource = async (
@@ -51,7 +55,6 @@ export const createOnDemandAuthorization = async () => {
   }
 };
 
-
 export const createDwollaCustomer = async (
   newCustomer: NewDwollaCustomerParams
 ) => {
@@ -59,18 +62,18 @@ export const createDwollaCustomer = async (
     const res = await dwollaClient.post("customers", newCustomer);
     return res.headers.get("location");
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      // Check if err has a response property (optional chaining)
-      if ((err as any).response) {
-        console.error("Error creating Dwolla Customer:", (err as any).response.data);
+    const dwollaError = err as DwollaErrorResponse;
+    if (dwollaError instanceof Error) {
+      if (dwollaError.response?.data) {
+        console.error("Error creating Dwolla Customer:", dwollaError.response.data);
       } else {
-        console.error("Error creating Dwolla Customer:", err.message);
+        console.error("Error creating Dwolla Customer:", dwollaError.message);
       }
     } else {
       console.error("Unexpected error:", err);
     }
     throw new Error("It is failing to create a Dwolla customer");
-}
+  }
 };
 
 export const createTransfer = async ({
@@ -119,6 +122,6 @@ export const addFundingSource = async ({
     };
     return await createFundingSource(fundingSourceOptions);
   } catch (err) {
-    console.error("Transfer fund failed: ", err);
-  }
+    console.error("Transfer fund failed:", err);
+}
 };
