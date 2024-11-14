@@ -35,7 +35,7 @@ const TransferPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-auto pt-1 w-full">
+    <div className="flex flex-col items-center justify-center h-auto pt-1 w-full mb-[60px]">
       <Toaster />
       <div className="w-full rounded-lg p-4">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
@@ -146,35 +146,68 @@ const TransferPage = () => {
 
       {/* Confirmation Modal */}
       {showConfirmation && (
-        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-80 shadow-lg text-center">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              Confirm Transfer
-            </h3>
-            <p className="text-gray-600 mb-4">
+            {/* Close Icon */}
+            <button
+              onClick={() => setShowConfirmation(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              &times;
+            </button>
+
+            {/* Icon and Title */}
+            <div className="text-center">
+              <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+                Confirm Transfer
+              </h3>
+            </div>
+
+            {/* Transfer Details */}
+            <p className="text-gray-600 mb-6 text-center">
               Are you sure you want to send{" "}
-              <span className="font-semibold">${amount}</span> to account ending
-              in
-              <span className="font-semibold">
+              <span className="font-semibold text-gray-800">${amount}</span> to
+              the account ending in{" "}
+              <span className="font-semibold text-gray-800">
                 {toAccountNumber.slice(-4)}
               </span>{" "}
-              at {toBankName}?
+              at{" "}
+              <span className="font-semibold text-gray-800">{toBankName}</span>?
             </p>
-            <div className="flex justify-center space-x-4">
+
+            {/* Action Buttons */}
+            <div className="flex justify-center gap-4">
               <button
                 onClick={() => setShowConfirmation(false)}
-                className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400"
+                className="bg-gray-200 text-gray-700 py-2 px-6 rounded-lg hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmTransfer}
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+                className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
               >
                 Confirm
               </button>
             </div>
           </div>
+            
         </div>
       )}
     </div>

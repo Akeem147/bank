@@ -39,7 +39,7 @@ const PayBill: FC = () => {
 
 
   return (
-    <div className="h-auto md:px-6 px-3 lg:px-0 mb-7">
+    <div className="h-auto md:px-6 px-3 lg:px-0 mb-[60px]">
        <Toaster />
       <div className="max-w-[950px] mx-auto bg-slate-100 shadow-md rounded-lg py-6 lg:px-4 md:px-3 px-2.5 space-y-6">
         {/* Header */}

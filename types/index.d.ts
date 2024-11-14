@@ -197,7 +197,7 @@ declare interface FooterProps {
 declare interface RightSidebarProps {
   user: User;
   transactions: Transaction[];
-  banks: (Partial<Bank> & Partial<Account>)[]; // Allow partial objects
+  banks: (Partial<Bank> & Partial<Account>)[]; 
 }
 
 declare interface SiderbarProps {

@@ -2,121 +2,125 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { sidebarLinks1 } from "@/constants";
-import { Menu } from "lucide-react";
+import { TbLogout } from "react-icons/tb"; // Import logout icon
+import Image from "next/image";
 import Link from "next/link";
-import { TbLogout } from "react-icons/tb";
+import { usePathname } from "next/navigation"; // Import usePathname from next/navigation
 
 export default function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  // Use usePathname to get the current URL path
+  const currentPath = usePathname();
 
   const handleLinkClick = (route: string) => {
-    setIsOpen(false);
     router.push(route);
   };
 
   const handleLogout = () => {
-    setShowModal(true);
+    setShowLogoutModal(true); // Open the modal for logout confirmation
   };
 
-  const logOut = () => {
-    router.push("/sign-in");
-  };
-
-  const handleMenu = () => {
-    setIsOpen(!isOpen);
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    router.push("/sign-in"); // Redirect to sign-in page
   };
 
   return (
-    <div className="w-full relative">
-      <div className="flex items-center justify-between px-3 py-4 md:px-4 md:py-5">
-        <Link className="flex items-center gap-1" href={"/"}>
-          <Image src="/icons/logo.svg" width={34} height={34} alt="logo" />
-          <h1 className="text-xl font-medium">AfriBank</h1>
+    <div className="relative">
+      {/* Logout button at the top right */}
+      <div className="flex items-center justify-between bg-slate-100 px-3 py-4">
+        <Link href={"/"} className="flex items-center gap-2">
+          <Image
+            src="/icons/logo.svg" // Replace with your logo's URL
+            alt="Logo"
+            className=""
+            width={30}
+            height={30}
+          />
+          <h2 className="text-black text-xl font-medium">Afribank Inc.</h2>
         </Link>
-        <button
-          onClick={handleMenu}
-          className="text-black-1 rounded font-medium"
-        >
-          <Menu width={24} height={24} />
+        <button onClick={handleLogout} className="font-medium">
+          <span>Sign Out</span>
         </button>
       </div>
 
-      {/* Sidebar with Slide-In Animation */}
-      <div
-        className={`fixed top-0 left-0 w-64 md:w-72 h-full bg-slate-100 text-black-2 shadow-lg transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <nav className="p-4 flex flex-col justify-between h-full">
-          {/* Top Section: Logo */}
-          <div>
-            <Link onClick={() => setIsOpen(false)} className="flex items-center gap-1 mb-10" href={"/"}>
-              <Image src="/icons/logo.svg" width={34} height={34} alt="logo" />
-              <h1 className="text-xl font-medium">AfriBank</h1>
-            </Link>
-
-            {/* Middle Section: Nav Links */}
-            <div className="flex flex-col space-y-4">
-              {sidebarLinks1.map(({ imgURL: Icon, route, label }) => (
-                <button
-                  key={route}
-                  onClick={() => handleLinkClick(route)}
-                  className="w-full flex items-center space-x-4 text-lg p-2 rounded my-1 hover:bg-blue-500 hover:text-white"
-                >
-                     {Icon ? (
-               <span> <Icon  width={24} height={24} /></span> // Render React Icon if not null
-              ) : (
-                <span className="text-gray">Default Icon</span> // Fallback in case Icon is null
-              )}
-                  <span className="">
-                    {label}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-          {/* Bottom Section: User Info and Logout */}
-          <div className="p-4 border-t border-gray-300">
-            <div className="flex items-center gap-1">
-              <span className="text-black-1 bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center font-medium">
-                A
-              </span>
-              <div className="flex flex-col ml-2 text-black-1">
-                <h5 className="font-semibold text-sm">Odede Akeem</h5>
-                <p className="text-xs">odedeakeem@gmail.com</p>
-              </div>
-            </div>
+      {/* Bottom Navigation Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-100 border-t border-gray-300 shadow-md">
+        <nav className="flex justify-around items-center py-2">
+          {sidebarLinks1.map(({ imgURL: Icon, route, label }) => (
             <button
-              onClick={handleLogout}
-              className="mt-4 flex items-center gap-2 text-black-1 font-semibold"
+              key={route}
+              onClick={() => handleLinkClick(route)}
+              className={`flex flex-col items-center text-xs ${
+                currentPath === route
+                  ? "text-blue-600 font-semibold" // Active link styles
+                  : "text-gray-600 hover:text-blue-500"
+              }`} // Apply active styles if route matches current path
             >
-              <span>Logout</span>
-              <TbLogout size={25} />
+              {Icon ? (
+                <Icon className="w-[25px] h-[25px]" /> // Render the Icon if it's not null
+              ) : (
+                <span>Default Icon</span> // Fallback if Icon is null
+              )}
+              <span>{label}</span>
             </button>
-          </div>
+          ))}
         </nav>
       </div>
 
-      {showModal && (
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
         <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex justify-center items-center">
-          <div className="bg-slate-100 rounded-lg p-6 w-96 shadow-lg">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4 text-center">
-              Are you sure you want to logout?
-            </h2>
-            <div className="flex justify-center gap-4 pt-5">
+          <div className="bg-white rounded-lg p-6 w-80 shadow-lg text-center">
+            {/* Close Icon */}
+            <button
+              onClick={() => setShowLogoutModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              &times;
+            </button>
+
+            {/* Icon and Title */}
+            <div className="text-center">
+              <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 16l-4-4m0 0l-4-4m4 4H3m13 4v5m0-10V5m5 5H3"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                Confirm Logout
+              </h2>
+              <p className="text-gray-500">
+                Are you sure you want to log out of your account? You will need
+                to log in again to access your information.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-6 flex justify-center gap-4">
               <button
-                onClick={() => setShowModal(false)}
-                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                onClick={() => setShowLogoutModal(false)}
+                className="bg-gray-200 text-gray-700 px-5 py-2 rounded-lg hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition"
               >
                 Cancel
               </button>
               <button
-                onClick={logOut}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                onClick={confirmLogout}
+                className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition"
               >
                 Logout
               </button>

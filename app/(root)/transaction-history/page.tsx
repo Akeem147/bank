@@ -35,7 +35,7 @@ const RecentTransactionsWithShowMore: FC = () => {
   };
 
   return (
-    <div className="w-full py-6 md:px-5 px-4 lg:px-5  bg-slate-100 rounded-lg shadow-md ">
+    <div className="w-full py-6 h-auto md:px-5 px-4 lg:px-5  bg-slate-100 rounded-lg shadow-md ">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Recent Transactions</h2>
       <ul className="divide-y divide-gray-200">
         {transactions.slice(0, visibleTransactions).map((transaction) => (
@@ -59,7 +59,7 @@ const RecentTransactionsWithShowMore: FC = () => {
       {visibleTransactions < transactions.length && (
         <button 
           onClick={showMoreTransactions}
-          className="mt-6 w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300"
+          className="mt-6 mb-[55px] w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300"
         >
           Show More
         </button>
