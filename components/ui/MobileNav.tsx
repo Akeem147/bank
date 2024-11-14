@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { sidebarLinks1 } from "@/constants";
-import { TbLogout } from "react-icons/tb"; // Import logout icon
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname from next/navigation

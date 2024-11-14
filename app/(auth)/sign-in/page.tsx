@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
-import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import { TfiEmail } from "react-icons/tfi";
+
 
 
 const SignIn = () => {
@@ -37,7 +36,7 @@ const SignIn = () => {
     <div className="flex min-h-screen items-center justify-center bg-[#1F2937] overflow-hidden">
       <Toaster />
 
-      <div className="flex flex-col items-center w-full md:max-w-xl lg:max-w-md  justify-center min-[414px]:gap-[140px] gap-[100px] md:gap-30 lg:gap-10">
+      <div className="flex flex-col items-center w-full md:max-w-xl lg:max-w-md  justify-center min-[414px]:gap-[140px] gap-[100px] md:gap-0 lg:gap-10">
         <div className="w-full md:max-w-xl lg:max-w-md p-8 bg-gray-800 rounded-lg">
           <div className="flex justify-center flex-col items-center mb-6">
             <Image
