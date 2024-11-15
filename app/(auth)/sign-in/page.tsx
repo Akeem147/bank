@@ -33,7 +33,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#1F2937] overflow-hidden">
+    <div className="flex h-screen items-center justify-center bg-[#1F2937] overflow-hidden">
       <Toaster />
 
       <div className="flex flex-col items-center w-full md:max-w-xl lg:max-w-md  justify-center min-[414px]:gap-[140px] gap-[100px] md:gap-0 lg:gap-10">

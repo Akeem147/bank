@@ -30,7 +30,7 @@ export default function MobileNav() {
   return (
     <div className="relative">
       {/* Logout button at the top right */}
-      <div className="flex items-center justify-between bg-slate-100 px-3 py-4">
+      <div className="fixed top-0 left-0 right-0 flex items-center bg-slate-100 z-40 shadow-sm justify-between  p-3 md:p-4">
         <Link href={"/"} className="flex items-center gap-2">
           <Image
             src="/icons/logo.svg" // Replace with your logo's URL
@@ -74,14 +74,6 @@ export default function MobileNav() {
       {showLogoutModal && (
         <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-6 w-80 shadow-lg text-center">
-            {/* Close Icon */}
-            <button
-              onClick={() => setShowLogoutModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            >
-              &times;
-            </button>
-
             {/* Icon and Title */}
             <div className="text-center">
               <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
