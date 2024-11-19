@@ -61,7 +61,7 @@ const RecentTransact: FC = () => {
           onClick={showMoreTransactions}
           className="mt-6 lg:mb-6 mb-10 md:mb-10 w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300"
         >
-          Large screen
+          Show more
         </button>
       )}
     </div>

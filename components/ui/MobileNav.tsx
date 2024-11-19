@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { sidebarLinks1 } from "@/constants";
 import Image from "next/image";
@@ -10,25 +10,37 @@ import { usePathname } from "next/navigation";
 export default function MobileNav() {
   const router = useRouter();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [hideBottomNav, setHideBottomNav] = useState(false);
 
   const currentPath = usePathname();
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        setHideBottomNav(true);
+      } else {
+        setHideBottomNav(false);
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const clearSessionAndRedirect = async () => {
     try {
-      // Call the logout API to clear the server-side cookie
       const response = await fetch("/api/sign-out", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       if (response.ok) {
-        // Remove any client-side tokens or session info
         localStorage.removeItem("authToken");
         sessionStorage.removeItem("authToken");
-
-        // Redirect the user to the sign-in page
         router.replace("/sign-in");
       } else {
         console.error("Failed to log out:", await response.text());
@@ -44,7 +56,7 @@ export default function MobileNav() {
 
   return (
     <div className="relative">
-      {/* Logout button at the top */}
+      {/* Top bar */}
       <div className="fixed top-0 left-0 right-0 flex items-center bg-slate-100 z-40 shadow-sm justify-between p-3 md:p-4">
         <Link href={"/"} className="flex items-center gap-2">
           <Image src="/icons/logo.svg" alt="Logo" width={30} height={30} />
@@ -65,8 +77,49 @@ export default function MobileNav() {
         </button>
       </div>
 
-      {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-100 border-t border-gray-300 shadow-md">
+      {/* Logout Modal */}
+      {showLogoutModal && (
+  <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex justify-center items-center h-screen w-full">
+    <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-[90%]">
+      {/* Header */}
+      <div className="text-center">
+        <h3 className="text-lg font-semibold text-gray-900">
+          Confirm Sign Out
+        </h3>
+        <p className="text-sm text-gray-600 mt-2">
+          Are you sure you want to sign out? You’ll need to log in again to access your account.
+        </p>
+      </div>
+      
+      {/* Buttons */}
+      <div className="flex justify-between gap-4 mt-6">
+        <button
+          className="flex-1 py-2 px-4 bg-gray-100 text-gray-600 font-medium rounded-lg hover:bg-gray-200 transition duration-150"
+          onClick={() => setShowLogoutModal(false)}
+        >
+          Cancel
+        </button>
+        <button
+          className="flex-1 py-2 px-4 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-150"
+          onClick={() => {
+            setShowLogoutModal(false);
+            clearSessionAndRedirect();
+          }}
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+      {/* Bottom Navigation */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-40 bg-slate-100 border-t border-gray-300 shadow-md transition-transform duration-300 ${
+          hideBottomNav ? "translate-y-full" : "translate-y-0"
+        }`}
+      >
         <nav className="flex justify-around items-center py-2">
           {sidebarLinks1.map(({ imgURL: Icon, route, label }) => (
             <button
@@ -88,51 +141,6 @@ export default function MobileNav() {
           ))}
         </nav>
       </div>
-
-      {/* Logout Confirmation Modal */}
-      {showLogoutModal && (
-        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex justify-center items-center h-screen">
-          <div className="bg-white rounded-lg p-6 w-80 shadow-lg text-center">
-            <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 16l-4-4m0 0l-4-4m4 4H3m13 4v5m0-10V5m5 5H3"
-                />
-              </svg>
-            </div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Confirm Logout
-            </h2>
-            <p className="text-gray-500">
-              Are you sure you want to log out of your account? You will need to
-              log in again to access your information.
-            </p>
-            <div className="mt-6 flex justify-center gap-4">
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="bg-gray-200 text-gray-700 px-5 py-2 rounded-lg hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={clearSessionAndRedirect}
-                className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition mb-20"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -104,7 +104,7 @@ export default function Sidebar() {
         <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex justify-center items-center h-screen w-full">
           <div className="bg-slate-100 rounded-lg p-6 w-96 shadow-lg">
             <div className="text-center">
-              <p className="text-black">Are you sure you want to log out?</p>
+              <p className="text-black"> Are you sure you want to sign out? You’ll need to log in again to access your account.</p>
               <div className="flex mt-4 justify-center gap-3">
                 <button
                   onClick={logOut}

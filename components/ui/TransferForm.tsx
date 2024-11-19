@@ -131,7 +131,7 @@ const TransferPage = () => {
             type="date"
             value={transferDate}
             onChange={(e) => setTransferDate(e.target.value)}
-            className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 mb-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
 
@@ -207,7 +207,6 @@ const TransferPage = () => {
               </button>
             </div>
           </div>
-            
         </div>
       )}
     </div>
