@@ -39,7 +39,7 @@ const PayBill: FC = () => {
 
 
   return (
-    <div className="h-auto md:px-6 px-3 lg:px-0 mb-[60px]">
+    <div className="h-auto lg:h-screen md:px-6 px-3 lg:px-0 mb-[60px] pt-[50px] lg:pt-0 lg:mb-0">
        <Toaster />
       <div className="max-w-[950px] mx-auto bg-slate-100 shadow-md rounded-lg py-6 lg:px-4 md:px-3 px-2.5 space-y-6">
         {/* Header */}
@@ -140,7 +140,7 @@ const PayBill: FC = () => {
 
       {/* Modal for Review Payment */}
       {showModal && (
-        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex items-center justify-center w-full h-screen">
           <div className="bg-white w-11/12 max-w-md p-6 rounded-lg shadow-lg space-y-4">
             <h2 className="text-xl font-semibold text-gray-800">Review Payment</h2>
             <p><strong>Account:</strong> {account || "N/A"}</p>

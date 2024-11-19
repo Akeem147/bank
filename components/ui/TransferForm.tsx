@@ -35,7 +35,7 @@ const TransferPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-auto pt-1 w-full mb-[60px]">
+    <div className="flex flex-col items-center justify-center h-screen  w-full mb-[80px]  md:mb-0">
       <Toaster />
       <div className="w-full rounded-lg p-4">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
@@ -146,7 +146,7 @@ const TransferPage = () => {
 
       {/* Confirmation Modal */}
       {showConfirmation && (
-        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-[#191919] bg-opacity-50 flex items-center justify-center z-50 h-screen">
           <div className="bg-white rounded-lg p-6 w-80 shadow-lg text-center">
             {/* Close Icon */}
             <button

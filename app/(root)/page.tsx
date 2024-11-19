@@ -2,11 +2,12 @@ import HeaderBox from "@/components/ui/HeaderBox";
 import RightSidebar from "@/components/ui/RightSidebar";
 import TotalBalanceBox from "@/components/ui/TotalBalanceBox";
 import RecentTransactionsWithShowMore from "./transaction-history/page";
+import RecentTransact from "@/components/RecentTransact";
 
 
 export default function Home() {
  
-  const loggedIn = { firstName: "Akeem.", lastName: "Odede",  email: "Aknpg@gmail.com"};
+  const loggedIn = { firstName: "Paris Watson.", lastName: "Watson",  email: "Waltsonparis22@gmail.com"};
   return (
     <section className="home">
        
@@ -24,7 +25,7 @@ export default function Home() {
             totalCurrentBalance={336212.25}
           />
         </header>
-        <RecentTransactionsWithShowMore/>
+        <RecentTransact/>
       </div>
       <RightSidebar user={loggedIn} transactions={[]} banks={[{currentBalance: 1320}]}/>
     </section>

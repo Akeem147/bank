@@ -20,7 +20,7 @@ export default function RightSidebar({
           </div>
           <div className="profile-details">
             <h1 className="profile-name">
-              {user.firstName} {user.lastName}
+              {user.firstName}
             </h1>
             <p className="profile-email">{user.email}</p>
           </div>

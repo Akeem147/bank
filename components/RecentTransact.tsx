@@ -27,17 +27,16 @@ const transactions: Transaction[] = [
   { id: 15, date: "2024-10-20", description: "Flight Booking", amount: -450.00, type: "debit" },
 ];
 
-const RecentTransactionsWithShowMore: FC = () => {
-  const [visibleTransactions, setVisibleTransactions] = useState(6);
+const RecentTransact: FC = () => {
+  const [visibleTransactions, setVisibleTransactions] = useState(5);
 
   const showMoreTransactions = () => {
-    setVisibleTransactions((prev) => Math.min(prev + 6, transactions.length));
+    setVisibleTransactions((prev) => Math.min(prev + 5, transactions.length));
   };
 
   return (
-    <div className="w-full flex flex-col gap-6 md:gap-[55px] pt-20 lg:pt-5 h-screen md:h-screen md:px-5 px-4 lg:px-5 bg-slate-100 rounded-lg shadow-md">
-     <div>
-     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Recent Transactions</h2>
+    <div className="w-full h-auto md:px-5 px-4 lg:px-5  bg-slate-100 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Recent Transactions</h2>
       <ul className="divide-y divide-gray-200">
         {transactions.slice(0, visibleTransactions).map((transaction) => (
           <li key={transaction.id} className="py-4 flex items-center gap-4 justify-between">
@@ -55,21 +54,18 @@ const RecentTransactionsWithShowMore: FC = () => {
           </li>
         ))}
       </ul>
-     </div>
 
       {/* Show More Button */}
-    <div>
-    {visibleTransactions < transactions.length && (
+      {visibleTransactions < transactions.length && (
         <button 
           onClick={showMoreTransactions}
-          className="mt-6 w-full  bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300"
+          className="mt-6 lg:mb-6 mb-10 md:mb-10 w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300"
         >
-          small screen
+          Large screen
         </button>
       )}
-    </div>
     </div>
   );
 };
 
-export default RecentTransactionsWithShowMore;
+export default RecentTransact;

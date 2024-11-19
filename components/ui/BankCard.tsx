@@ -15,7 +15,7 @@ export default function BankCard() {
             alt="Logo"
             width={30} height={30} 
           />
-            <h2 className="text-white font-medium">Afribank</h2>
+            <h2 className="text-white font-medium">Uniti bank</h2>
           </div>
            <Image src="/icons/bank-chip.jpg" width={30} height={30} alt="cjip" />
           </div>

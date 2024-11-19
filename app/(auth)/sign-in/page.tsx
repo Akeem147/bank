@@ -1,24 +1,37 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
-
-
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
+  useEffect(() => {
+    // Check if user is already logged in
+    const userLoggedIn = Cookies.get("userLoggedIn");
+    if (userLoggedIn === "true") {
+      router.push("/"); // Redirect to home if already logged in
+    }
+  }, [router]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       if (email === "ak@gmail.com" && password === "password123") {
+        // Set the login cookie
+        Cookies.set("userLoggedIn", "true", { expires: 1 }); // Expires in 1 day
+
         toast.success("Logged in successfully!", {
           icon: "✅",
         });
+
+        // Redirect to the homepage
         router.push("/");
       } else {
         toast.error("Incorrect login details", {
@@ -35,18 +48,17 @@ const SignIn = () => {
   return (
     <div className="flex h-screen items-center justify-center bg-[#1F2937] overflow-hidden">
       <Toaster />
-
-      <div className="flex flex-col items-center w-full md:max-w-xl lg:max-w-md  justify-center min-[414px]:gap-[140px] gap-[100px] md:gap-0 lg:gap-10">
+      <div className="flex flex-col items-center w-full md:max-w-xl lg:max-w-md justify-center min-[414px]:gap-[140px] gap-[100px] md:gap-0 lg:gap-10">
         <div className="w-full md:max-w-xl lg:max-w-md p-8 bg-gray-800 rounded-lg">
           <div className="flex justify-center flex-col items-center mb-6">
             <Image
-              src="/icons/logo.svg" // Replace with your logo's URL
+              src="/icons/logo.svg"
               alt="Logo"
               className="mt-10"
               width={60}
               height={60}
             />
-            <h2 className="text-white text-2xl font-medium">Afribank Inc.</h2>
+            <h2 className="text-white text-2xl font-medium">Uniti Bank</h2>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
@@ -56,7 +68,7 @@ const SignIn = () => {
                 className="block text-sm font-medium text-gray-400"
               >
                 Email
-              </label> 
+              </label>
               <input
                 type="email"
                 id="email"
@@ -97,9 +109,9 @@ const SignIn = () => {
         </div>
 
         <footer className="text-white flex items-center justify-center gap-2 w-full">
-         <p className="border-r pr-3">Enroll</p>
-         <p className="border-r pr-3">Become a Member</p>
-         <p>Legal</p>
+          <p className="border-r pr-3">Enroll</p>
+          <p className="border-r pr-3">Become a Member</p>
+          <p>Legal</p>
         </footer>
       </div>
     </div>

@@ -29,7 +29,7 @@ const MyBanksPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-auto md:px-3 lg:px-0 bg-slate-100 mb-[60px]">
+    <div className="w-full h-auto md:px-3 lg:px-0 bg-slate-100 mb-[60px] lg:mb-0 pt-[50px] lg:pt-0">
       <div className="rounded-lg w-full max-w-[900px] p-6">
         {/* Header Section */}
         <div className="flex justify-between items-center border-b pb-4 mb-2">
