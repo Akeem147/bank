@@ -2,7 +2,7 @@
 
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST() {
   // Clear cookies or any session-based data on the server side.
   // For example, you can clear cookies like this:
 

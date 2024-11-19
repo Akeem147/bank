@@ -1,7 +1,6 @@
 import HeaderBox from "@/components/ui/HeaderBox";
 import RightSidebar from "@/components/ui/RightSidebar";
 import TotalBalanceBox from "@/components/ui/TotalBalanceBox";
-import RecentTransactionsWithShowMore from "./transaction-history/page";
 import RecentTransact from "@/components/RecentTransact";
 
 
