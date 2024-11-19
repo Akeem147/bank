@@ -33,12 +33,13 @@ export default function MobileNav() {
 
   const clearSessionAndRedirect = async () => {
     try {
-      const response = await fetch("/api/sign-out", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sign-out`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' },
       });
 
       if (response.ok) {
+        console.log('Sign-out successful:', await response.json());
         localStorage.removeItem("authToken");
         sessionStorage.removeItem("authToken");
         router.replace("/sign-in");

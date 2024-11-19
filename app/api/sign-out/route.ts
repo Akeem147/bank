@@ -1,4 +1,4 @@
-// app/api/logout/route.ts
+// app/api/sign-out/route.ts
 
 import { NextResponse } from 'next/server';
 
