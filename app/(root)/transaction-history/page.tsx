@@ -73,7 +73,7 @@ const RecentTransactionsWithShowMore: FC = () => {
       {visibleTransactions < transactions.length && (
         <button
           onClick={showMoreTransactions}
-          className="w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300 mb-8"
+          className="w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-300 my-4"
         >
           Show More
         </button>
